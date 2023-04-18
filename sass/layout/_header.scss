@@ -1,0 +1,28 @@
+header{
+    background-color: coral;
+
+    nav{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        ul{
+            display:flex;
+            flex-direction: row;
+            justify-content: end;
+            padding: 0;
+            margin: 0;
+            width: .4vw;
+            gap: 10px;
+
+            li{
+                
+
+                a{
+                    text-decoration: none;
+                    font-size: 2em;
+                }
+            }
+        }
+    }
+}

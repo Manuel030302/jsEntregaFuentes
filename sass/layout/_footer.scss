@@ -1,0 +1,21 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: cyan;
+
+    div{
+
+        form{
+
+            fieldset{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                textarea{
+                    padding: 8px;
+                }
+            }
+        }
+    }
+}
