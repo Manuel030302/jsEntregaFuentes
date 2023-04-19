@@ -23,8 +23,6 @@ let enviado = false
 
 function login() {
 
-    // if()
-
     formulario.onsubmit = (enviar) => {
         enviar.preventDefault()
         const infousuario = {
@@ -33,7 +31,7 @@ function login() {
         }
         localStorage.setItem('infousuario', JSON.stringify(infousuario))
         formulario.remove()
-        // formulario.detach()
+
         mostrarcatalogo()
         console.log('registro exitoso') ///////////////////////////////////////modificar Alert
         enviado = true
@@ -135,11 +133,7 @@ function agregarAlCarrito(){
             console.log(carrito)
 
             localStorage.setItem('carrito', JSON.stringify(carrito))
-            // carritostorage.push()
 
-
-
-            //localStorage.setItem('carrito', JSON.stringify(carrito))
         }
     });
 
@@ -147,11 +141,8 @@ function agregarAlCarrito(){
 
 function ircarrito(){
 
-    // let carritostorage = JSON.parse(localStorage.getItem('carrito'))
-
     carritobutton.onclick = () => {
-        // article1.remove() //////////////////////////////////////////////////////////////////
-        // carritobutton.remove()//////////////////////////////////////////////////////////////
+
         ocultarelemento(article1)
         ocultarelemento(carritobutton)
 
@@ -170,10 +161,6 @@ function ircarrito(){
         const divbuttons = document.createElement('div')
         divbuttons.setAttribute('id', 'divcarritobtn')
         section1.append(divbuttons)
-        /* const comprarbtn = document.createElement('button')
-        comprarbtn.setAttribute()
-        divbuttons.append(comprarbtn) */
-
 
         tbcarh.innerHTML = `<tr>
             <th>Juego</th>
@@ -183,6 +170,7 @@ function ircarrito(){
             <th>Cantidad</th>
             <th>Total</th>
         </tr>`
+
         // carrito. ...
         carrito.forEach(game => {
             tbcarb.innerHTML += `<tr>
@@ -197,31 +185,23 @@ function ircarrito(){
         divbuttons.innerHTML = 
         `<button id="carritoclean" class="btn btn-success">Vaciar carrito</button>
         <button id="carritobuy" class="btn btn-success">Comprar carrito</button>`
-        /* const vaciarCBtn = document.querySelector('#carritoclean')
-
-        vaciarCBtn.onclick = () => {
-            localStorage.removeItem("carrito")
-
-        } */
 
         vaciarCarrito()
 
         comprarCarrito()
 
-        
     }
 
 }
 
-/////////////////////////////////////produccion//////////////////////////////
+
 function comprarCarrito() {
     const comprarCBtn = document.querySelector('#carritobuy')
     comprarCBtn.onclick = () => {
         const divcarritobtn = document.querySelector('#divcarritobtn')
-        // localStorage.removeItem("carrito")
         artcarrito.remove()
         divcarritobtn.remove()
-        // carrito = []
+    
         console.log(carrito)
 
         const formArticle = document.createElement('article')
@@ -257,9 +237,7 @@ function comprarCarrito() {
 
     
 }
-////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////produccion//////////////////////////////
 function pagarcarrito() {
 
     const formbuycar = document.querySelector('#formbuycar')
@@ -268,13 +246,6 @@ function pagarcarrito() {
     const expirecard = document.querySelector('#expirecard')
     const cvvcard = document.querySelector('#cvvcard')
 
-    // biblioteca = JSON.parse(localStorage.getItem('carrito'))
-
-    /* if(localStorage.getItem('biblioteca')){
-        if((JSON.parse(localStorage.getItem('biblioteca'))) != []){
-            biblioteca = (JSON.parse(localStorage.getItem('biblioteca'))).slice()
-        }
-    } */
 
     formbuycar.onsubmit = (enviar) => {
         enviar.preventDefault()
@@ -287,137 +258,116 @@ function pagarcarrito() {
         console.log(infousuariocard) 
         localStorage.setItem('infousuariocard', JSON.stringify(infousuariocard))
         formbuycar.remove()
-        // formulario.detach()
+
+
+
         console.log("//////////////////////////////////////////")
         console.log(JSON.parse(localStorage.getItem('carrito')))
         console.log("//////////////////////////////////////////")
 
-        //console.log(biblioteca)
-        // localStorage.setItem('biblioteca', (localStorage.getItem('carrito')))
 
-        // biblioteca.find((game) => game.id == )
+        console.log("/////////////////////antes de asignar a var biblioteca/////////////////////")
+        console.log(JSON.parse(localStorage.getItem('biblioteca')))
+        console.log(biblioteca)
+        console.log("//////////////////////////////////////////")
+
+        biblioteca = JSON.parse(localStorage.getItem('biblioteca'))
+        let carritotemp = JSON.parse(localStorage.getItem('carrito'))
+
+        console.log("//////////////////////////////////////////")
+        console.log(JSON.parse(localStorage.getItem('biblioteca')))
+        console.log(biblioteca)
+        console.log("//////////////////////////////////////////")
+
+
+        console.log("//////////////////////////////////////////")
+        console.log(JSON.parse(localStorage.getItem('carrito')))
+        console.log(carritotemp)
+        console.log("//////////////////////////////////////////")
         
-
+        
         if(localStorage.getItem('biblioteca')){
             if((JSON.parse(localStorage.getItem('biblioteca'))) != []){
-                // biblioteca = (JSON.parse(localStroage.getItem('biblioteca'))).slice()
 
-                console.log("/////////////////////antes de asignar a var biblioteca/////////////////////")
-                console.log(JSON.parse(localStorage.getItem('biblioteca')))
-                console.log(biblioteca)
-                console.log("//////////////////////////////////////////")
+                // al recorrerse el arreglo del carrito se deja fuera los elementos de la biblioteca
 
-                biblioteca = JSON.parse(localStorage.getItem('biblioteca'))
-
-                let carritotemp = JSON.parse(localStorage.getItem('carrito'))
-
-                console.log("//////////////////////////////////////////")
-                console.log(JSON.parse(localStorage.getItem('biblioteca')))
-                console.log(biblioteca)
-                console.log("//////////////////////////////////////////")
-
-                // localStorage.setItem('biblioteca', (localStorage.getItem('carrito')))
-                // biblioteca = (JSON.parse(localStorage.getItem('carrito'))).slice()
-
-                console.log("//////////////////////////////////////////")
-                console.log(JSON.parse(localStorage.getItem('carrito')))
-                console.log(carritotemp)
-                console.log("//////////////////////////////////////////")
-
-                // console.log(`La biblioteca es: ${JSON.parse(localStorage.getItem('biblioteca'))}`)
-                /* let juegorepet = []
-                let juegonew = []
-                juegorepet = (JSON.parse(localStorage.getItem('carrito'))).filter((game) => game.id == biblioteca.id)
-                juegonew = (JSON.parse(localStorage.getItem('carrito'))).filter((game) => game.id != biblioteca.id)
-
-                console.log(`Juegos repetidos: ${juegorepet}`)
-                console.log(`Juegos nuevos: ${juegonew}`) */
-
-                
-                
-                // console.log(`El carrito temporal es: ${JSON.parse(localStorage.getItem('carrito'))}`)
+                //hacer que se recorra alrevez (biblioteca en vez de carrito)
 
                 carritotemp.forEach((gameselec) => {
-                    // if(biblioteca.includes((game) => game.id == (JSON.parse(localStorage.getItem('carrito'))).id)){}
 
                     console.log('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
                     console.log(biblioteca)
 
+                    console.log('===================gameselect inicio=======================')
+                    console.log(gameselec)
+
                     if(biblioteca.find((game) => game.id == gameselec.id)){
 
-                        console.log('******************************************')
+                        console.log('*******************juegorepetido***********************')
                         let juegorepetido = biblioteca.find((game) => game.id == gameselec.id)
                         console.log(juegorepetido)
 
-                        let indexjuegorepetido = biblioteca.indexOf(juegorepetido)
-                        let juegorepcarrito = carritotemp[indexjuegorepetido]
-
-                        let cantidadjuegos = juegorepetido.cantidad + juegorepcarrito.cantidad
+                        juegorepetido.cantidad = juegorepetido.cantidad + gameselec.cantidad
                         
+                        console.log('----------------------juegorepetido cantidad correcta----------------------')
+                        console.log(juegorepetido)
 
+                        bibliotecanew.push(juegorepetido)
 
+                        console.log('----------------------bibliotecanew----------------------')
+                        console.log(bibliotecanew)
 
-                        // game.cantidad += gameselec.cantidad
-
-                        console.log(game.cantidad)
-
-                        // let juegorepetido = biblioteca.find((gameb) => gameb.id == gameselec.id)
-
-                        // let juegorepetido = (JSON.parse(localStorage.getItem('carrito'))).find((gamerep) => gamerep.id == gameselec.id)
                     }else{
-                        biblioteca.push(gameselec)
+                        bibliotecanew.push(gameselec)
+
+                        console.log('----------------------bibliotecanew else----------------------')
+                        console.log(bibliotecanew)
+
                     }
-                    console.log('-----------------------------------------------')
+                    console.log('----------------------gameselec final-------------------------')
                     console.log(gameselec)
-                    console.log(biblioteca)
+
                 })
 
-                localStorage.setItem('biblioteca', JSON.stringify(biblioteca))
+                localStorage.setItem('biblioteca', JSON.stringify(bibliotecanew))
 
-                console.log(biblioteca)
+                console.log(bibliotecanew)
 
-                biblioteca = []
+                bibliotecanew = []
 
-                console.log('################################################')
-                console.log(biblioteca)
+                console.log('#######################se borra bibliotecanew#########################')
+                console.log(bibliotecanew)
 
-                /* biblioteca = biblioteca.concat(JSON.parse(localStorage.getItem('carrito')))
-
-                localStorage.setItem('biblioteca', JSON.stringify(biblioteca))
-
-                console.log('Se agregaron nuevos productos a la biblioteca') */ ///////////////////////////////////////modificar Alert
                 console.log('Se agregaron nuevos productos a la biblioteca') ///////////////////////////////////////modificar Alert
             }
         }else{
             localStorage.setItem('biblioteca', (localStorage.getItem('carrito')))
 
             console.log('Se agregaron nuevos productos a la biblioteca vacia') ///////////////////////////////////////modificar Alert
+            
+            console.log('-----------------carrito reset--------------------')
+            carrito = []
+            console.log(carrito)
         }
-        // localStorage.setItem('biblioteca', JSON.stringify(biblioteca))
-        // carrito = []
+
         localStorage.removeItem("carrito")
-        
 
         mostrarcatalogo()
         mostrarelemento(carritobutton, 'flex')
         
     }
 }
-////////////////////////////////////////////////////////////////////////////
 
 function vaciarCarrito() {
     const vaciarCBtn = document.querySelector('#carritoclean')
     vaciarCBtn.onclick = () => {
         const divcarritobtn = document.querySelector('#divcarritobtn')
-        /* localStorage.removeItem("carrito")
-        imprimirjuegos()
-        console.log(carrito) */
+
         mostrarelemento(article1, 'flex')
         mostrarelemento(carritobutton, 'flex')
         localStorage.removeItem("carrito")
         artcarrito.remove()
         divcarritobtn.remove()
-        // divbuttons.remove()
         carrito = []
         console.log(carrito)
     }
@@ -426,6 +376,7 @@ function vaciarCarrito() {
 let juegos_disponibles = []
 let carrito = []
 let biblioteca = []
+let bibliotecanew = []
 let carritostorage = []
 
 let addcar
@@ -453,18 +404,13 @@ function cargarjuegos(){
     })
     .then ((resp) => {
 
-
         if(localStorage.getItem('infousuario')){
             formulario.remove()
-            // formulario.detach()
             mostrarcatalogo()
-
             console.log(JSON.parse(localStorage.getItem('infousuario')))
         }else{
-
             login()
         }
-
     })
     .then((resp) => {
         console.log(imprimirjuegos())
@@ -475,20 +421,14 @@ function cargarjuegos(){
     })
     .then((resp) => {
 
-
         agregarAlCarrito(resp)
-
 
     })
     .then((resp) => {
 
         ircarrito(resp)
 
-        
     })
-    /* .then((resp) => {
-        vaciarCarrito()
-    }) */
     .catch((err) => console.log(err))
 }
 
