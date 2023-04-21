@@ -5,12 +5,10 @@
 // Al menos una librería de uso relevante para el proyecto.############
 // Manejo de promesas con fetch.############
 // Carga de datos desde un JSON local o desde una API externa.############
-// Recuerda agregar validaciones en el ingreso de los datos del usuario. No se debería poder ingresar valores vacíos.
-// Podrías agregar botones para que el usuario pueda modificar los productos agregados en el carrito.
-// Podrías agregar una funcionalidad para finalizar la compra, en donde el usuario tenga que ingresar sus datos y luego de validarlos, mostrar un mensaje de compra finalizada y limpiar el carrito de compras.
+// Recuerda agregar validaciones en el ingreso de los datos del usuario. No se debería poder ingresar valores vacíos. .############
+// Podrías agregar botones para que el usuario pueda modificar los productos agregados en el carrito. .############
+// Podrías agregar una funcionalidad para finalizar la compra, en donde el usuario tenga que ingresar sus datos y luego de validarlos, mostrar un mensaje de compra finalizada y limpiar el carrito de compras. .############
 // Recuerda agregar un archivo README en el repositorio con la descripción de tu proyecto
-
-
 
 const article1 = document.querySelector('#catalogo1')
 const section1 = document.querySelector('#section1')
@@ -60,7 +58,6 @@ function ocultarcatalogo() {
 
 function mostrarcatalogo() {
     article1.style.display = 'flex'
-    // article1.style.gap = '10px'
 }
 
 function notificacioncarrito(message) {
@@ -81,6 +78,8 @@ function notificacioncarrito(message) {
 }
 
 function imprimirjuegos() {
+    console.log('---------------------------juegos impresos en pantalla-----------------------------')
+    console.log(juegos_disponibles)
     juegos_disponibles.forEach(game => {
         article1.innerHTML = article1.innerHTML + `<div class="card" style="width: 18rem;">
             <img src="${game.image}" class="card-img-top" alt="icono de prueba">
@@ -105,8 +104,6 @@ function agregarAlCarrito(){
 
     addcar.forEach(btn => {
         btn.onclick = () =>{
-
-            // carrito = (JSON.parse(localStorage.getItem('carrito'))).slice()
 
             const juego = juegos_disponibles.find((game) => game.id === parseInt(btn.id))
             console.log(juego)
@@ -191,7 +188,6 @@ function ircarrito(){
         comprarCarrito()
 
     }
-
 }
 
 
@@ -234,8 +230,6 @@ function comprarCarrito() {
 
         pagarcarrito()
     }
-
-    
 }
 
 function pagarcarrito() {
@@ -272,6 +266,7 @@ function pagarcarrito() {
         console.log("//////////////////////////////////////////")
 
         biblioteca = JSON.parse(localStorage.getItem('biblioteca'))
+        bibliotecanew = biblioteca
         let carritotemp = JSON.parse(localStorage.getItem('carrito'))
 
         console.log("//////////////////////////////////////////")
@@ -289,22 +284,18 @@ function pagarcarrito() {
         if(localStorage.getItem('biblioteca')){
             if((JSON.parse(localStorage.getItem('biblioteca'))) != []){
 
-                // al recorrerse el arreglo del carrito se deja fuera los elementos de la biblioteca
-
-                //hacer que se recorra alrevez (biblioteca en vez de carrito)
-
-                carritotemp.forEach((gameselec) => {
+                biblioteca.forEach((gameselec) => {
 
                     console.log('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
-                    console.log(biblioteca)
+                    console.log(carritotemp)
 
                     console.log('===================gameselect inicio=======================')
                     console.log(gameselec)
 
-                    if(biblioteca.find((game) => game.id == gameselec.id)){
+                    if(carritotemp.find((game) => game.id == gameselec.id)){
 
                         console.log('*******************juegorepetido***********************')
-                        let juegorepetido = biblioteca.find((game) => game.id == gameselec.id)
+                        let juegorepetido = carritotemp.find((game) => game.id == gameselec.id)
                         console.log(juegorepetido)
 
                         juegorepetido.cantidad = juegorepetido.cantidad + gameselec.cantidad
@@ -312,33 +303,38 @@ function pagarcarrito() {
                         console.log('----------------------juegorepetido cantidad correcta----------------------')
                         console.log(juegorepetido)
 
-                        bibliotecanew.push(juegorepetido)
+                        // indice de juego repetido en la newbiblioteca
+                        let indexgamerep = bibliotecanew.indexOf(bibliotecanew.find((juego) => juego.id == juegorepetido.id))
+
+                        // indice de juego repetido en el carritotemp
+                        let indexgamerep2 = carritotemp.indexOf(carritotemp.find((juego2) => juego2.id == gameselec.id))
+
+                        bibliotecanew.splice(indexgamerep, 1, juegorepetido)
+                        carritotemp.splice(indexgamerep2, 1)
 
                         console.log('----------------------bibliotecanew----------------------')
                         console.log(bibliotecanew)
 
-                    }else{
-                        bibliotecanew.push(gameselec)
-
-                        console.log('----------------------bibliotecanew else----------------------')
-                        console.log(bibliotecanew)
-
                     }
+
                     console.log('----------------------gameselec final-------------------------')
                     console.log(gameselec)
 
                 })
 
+                bibliotecanew = bibliotecanew.concat(carritotemp)
+
                 localStorage.setItem('biblioteca', JSON.stringify(bibliotecanew))
 
                 console.log(bibliotecanew)
 
-                bibliotecanew = []
-
                 console.log('#######################se borra bibliotecanew#########################')
+
                 console.log(bibliotecanew)
 
                 console.log('Se agregaron nuevos productos a la biblioteca') ///////////////////////////////////////modificar Alert
+
+                carrito = []
             }
         }else{
             localStorage.setItem('biblioteca', (localStorage.getItem('carrito')))
@@ -413,24 +409,13 @@ function cargarjuegos(){
         }
     })
     .then((resp) => {
-        console.log(imprimirjuegos())
-
         addcar = imprimirjuegos()
-
-        return addcar
     })
     .then((resp) => {
-
-        agregarAlCarrito(resp)
-
+        agregarAlCarrito()
     })
     .then((resp) => {
-
         ircarrito(resp)
-
     })
     .catch((err) => console.log(err))
 }
-
-
-
